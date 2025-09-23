@@ -81,5 +81,7 @@ if not pg:FindFirstChild("MulaiGUI") then
         -- tomato baru (tambahanmu)
         task.wait(0.2)
         placeTomato(CFrame.new(-331.9622,61.6803,-110.7127,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.9622,61.6803,-110.7127))
+        task.wait(0.2) pressE()
+        task.wait(0.2) pressE()
     end)
 end
