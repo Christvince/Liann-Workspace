@@ -3,6 +3,9 @@ local pg = player:WaitForChild("PlayerGui")
 local rs = game:GetService("ReplicatedStorage")
 local vim = game:GetService("VirtualInputManager")
 
+-- Count wins
+local winsCount = 0
+
 -- Function buat place unit tomato
 local function placeTomato(cf, pos)
     local args = {
@@ -44,54 +47,184 @@ if not pg:FindFirstChild("MulaiGUI") then
     button.MouseButton1Click:Connect(function()
         screenGui:Destroy()
 
-        -- vote difficulty easy
-        rs.RemoteFunctions.PlaceDifficultyVote:InvokeServer("dif_easy")
+        -- GUI WINS
+        if not pg:FindFirstChild("WinsGUI") then
+            local winGui = Instance.new("ScreenGui", pg)
+            winGui.Name = "WinsGUI"
+            winGui.ResetOnSpawn = false
 
+            local winLabel = Instance.new("TextLabel", winGui)
+            winLabel.Size = UDim2.new(0, 150, 0, 40)
+            winLabel.Position = UDim2.new(0, 10, 0, 50)
+            winLabel.BackgroundColor3 = Color3.fromRGB(30,30,30)
+            winLabel.TextColor3 = Color3.fromRGB(255,255,0)
+            winLabel.TextScaled = true
+            winLabel.Font = Enum.Font.SourceSansBold
+            winLabel.Text = "WINS: "..winsCount
+        end
+
+        -- vote difficulty awal
+        rs.RemoteFunctions.PlaceDifficultyVote:InvokeServer("dif_easy")
         task.wait(5)
         rs.RemoteFunctions.ChangeTickSpeed:InvokeServer(2)
 
-        -- place tomato awal
-        task.wait(0.2)
-        placeTomato(CFrame.new(-339.1055,61.6803,-100.4691,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-339.1055,61.6803,-100.4691))
-        task.wait(0.2)
-        placeTomato(CFrame.new(-331.3932,61.6803,-100.0715,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.3932,61.6803,-100.0715))
-        task.wait(0.2)
-        placeTomato(CFrame.new(-331.5192,61.6803,-103.1274,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.5192,61.6803,-103.1274))
-        task.wait(0.2)
-        placeTomato(CFrame.new(-338.9552,61.6803,-103.4652,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-338.9552,61.6803,-103.4652))
+        -- LOOP UTAMA
+        while true do
+local player = game:GetService("Players").LocalPlayer
+local pg = player:WaitForChild("PlayerGui")
+local rs = game:GetService("ReplicatedStorage")
+local vim = game:GetService("VirtualInputManager")
 
-        -- tomato ke-5 setelah 20 detik
-        task.wait(20)
-        placeTomato(CFrame.new(-339.1533,61.6803,-113.4811,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-339.1533,61.6803,-113.4811))
+            -- tomato ke-1 sampai ke-4
+            task.wait(0.2)
+            placeTomato(CFrame.new(-339.1055,61.6803,-100.4691,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), Vector3.new(-339.1055,61.6803,-100.4691))
+            task.wait(0.2)
+            placeTomato(CFrame.new(-331.3932,61.6803,-100.0715,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), Vector3.new(-331.3932,61.6803,-100.0715))
+            task.wait(0.2)
+            placeTomato(CFrame.new(-331.5192,61.6803,-103.1274,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), Vector3.new(-331.5192,61.6803,-103.1274))
+            task.wait(0.2)
+            placeTomato(CFrame.new(-338.9552,61.6803,-103.4652,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), Vector3.new(-338.9552,61.6803,-103.4652))
 
-        -- tekan E 5x
-        task.wait(0.2) pressE()
-        task.wait(5)   pressE()
-        task.wait(11)  pressE()
-        task.wait(25)  pressE()
+            -- tomato ke-5
+            task.wait(20)
+            placeTomato(CFrame.new(-339.1533,61.6803,-113.4811,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), Vector3.new(-339.1533,61.6803,-113.4811))
+            task.wait(0.2) pressE()
+            task.wait(5)   pressE()
+            task.wait(11)  pressE()
+            task.wait(25)  pressE()
 
-        -- tomato ke-6
-        task.wait(0.2)
-        placeTomato(CFrame.new(-332.2421,61.6803,-113.5365,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-332.2421,61.6803,-113.5365))
-        task.wait(0.2) pressE()
-        task.wait(2)   pressE()
-        task.wait(7.5) pressE()
-        task.wait(7.5) pressE()
+            -- tomato ke-6
+            task.wait(0.2)
+            placeTomato(CFrame.new(-332.2421,61.6803,-113.5365,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), Vector3.new(-332.2421,61.6803,-113.5365))
+            task.wait(0.2) pressE()
+            task.wait(2)   pressE()
+            task.wait(8.2) pressE()
+            task.wait(9) pressE()
 
-        -- tomato baru (tambahan ke-7)
-        task.wait(0.2)
-        placeTomato(CFrame.new(-331.9622,61.6803,-110.7127,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.9622,61.6803,-110.7127))
-        task.wait(0.8) pressE()
-        task.wait(0.8) pressE()
-        task.wait(8) pressE()
-        task.wait(10) pressE()
+            -- tomato ke-7
+            task.wait(0.2)
+            placeTomato(CFrame.new(-327.3110,61.6803,-111.0615,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-327.3110,61.6803,-111.0615))
+            task.wait(0.8) pressE()
+            task.wait(0.8) pressE()
+            task.wait(8) pressE()
+            task.wait(10) pressE()
 
-        -- tomato baru (tambahan ke-8, yang terakhir kamu kasih)
-        task.wait(0.2)
-        placeTomato(CFrame.new(-338.7828,61.6803,-110.5221,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-338.7828,61.6803,-110.5221))
-        task.wait(10) pressE()
-        task.wait(0.2) pressE()
-        task.wait(0.2) pressE()
-        task.wait(0.2) pressE()
+            -- tomato ke-8
+            task.wait(0.2)
+            placeTomato(CFrame.new(-343.8525,61.6803,-110.9432,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-343.8525,61.6803,-110.9432))
+            task.wait(10) pressE()
+            task.wait(0.2) pressE()
+            task.wait(5.2) pressE()
+            task.wait(4.5) pressE()
+
+            -- tomato ke-9
+            task.wait(0.2)
+            placeTomato(CFrame.new(-330.3533,61.6803,-107.7189,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-330.3533,61.6803,-107.7189))
+            task.wait(7) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+
+            -- tomato ke-10
+            task.wait(0.2)
+            placeTomato(CFrame.new(-340.2498,61.6803,-107.2835,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-340.2498,61.6803,-107.2835))
+            task.wait(4) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+            task.wait(3.8) pressE()
+
+            -- tomato ke-11
+            task.wait(0.2)
+            placeTomato(CFrame.new(-326.9052,61.6803,-103.4914,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-326.9052,61.6803,-103.4914))
+            task.wait(4) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+
+            -- tomato ke-12
+            task.wait(4)
+            placeTomato(CFrame.new(-344.5626,61.6803,-102.2603,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-344.5626,61.6803,-102.2603))
+            task.wait(3) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+
+            -- tomato ke-13
+            task.wait(0.2)
+            placeTomato(CFrame.new(-338.5904,61.6803,-118.1612,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-338.5904,61.6803,-118.1612))
+            task.wait(4) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+
+            -- tomato ke-14
+            task.wait(0.2)
+            placeTomato(CFrame.new(-331.8696,61.6803,-118.6361,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-331.8696,61.6803,-118.6361))
+            task.wait(4) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+            task.wait(1) pressE()
+
+            -- tomato ke-15
+            task.wait(0.2)
+            placeTomato(CFrame.new(-343.5304,61.6803,-117.6718,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-343.5304,61.6803,-117.6718))
+            task.wait(8) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+
+            -- tomato ke-16
+            task.wait(0.2)
+            placeTomato(CFrame.new(-326.6794,61.6803,-118.5282,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-326.6794,61.6803,-118.5282))
+            task.wait(4.2) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+
+            -- tomato ke-17
+            task.wait(0.2)
+            placeTomato(CFrame.new(-331.0135,61.6803,-133.1104,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-331.0135,61.6803,-133.1104))
+            task.wait(3) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+
+            -- tomato ke-18
+            task.wait(0.2)
+            placeTomato(CFrame.new(-331.6885,61.6803,-129.3381,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-331.6885,61.6803,-129.3381))
+            task.wait(2) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+
+            -- tomato ke-19
+            task.wait(0.2)
+            placeTomato(CFrame.new(-339.4583,61.6803,-134.3977,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-339.4583,61.6803,-134.3977))
+            task.wait(2) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+
+            -- tomato ke-20
+            task.wait(0.2)
+            placeTomato(CFrame.new(-339.3755,61.6803,-129.1289,-1,0,-8.742e-08,0,1,0,8.742e-08,0,-1), Vector3.new(-339.3755,61.6803,-129.1289))
+            task.wait(1) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+            task.wait(0.5) pressE()
+
+            -- restart game + pilih difficulty lagi
+            task.wait(4.2)
+            rs.RemoteFunctions.RestartGame:InvokeServer()
+            task.wait(1)
+            rs.RemoteFunctions.PlaceDifficultyVote:InvokeServer("dif_easy")
+            task.wait(5)
+
+            -- tambah WINS di akhir loop
+            winsCount += 1
+            if pg:FindFirstChild("WinsGUI") then
+                pg.WinsGUI.TextLabel.Text = "WINS: "..winsCount
+            end
+        end
     end)
 end
