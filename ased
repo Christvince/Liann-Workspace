@@ -1,0 +1,85 @@
+local player = game:GetService("Players").LocalPlayer
+local pg = player:WaitForChild("PlayerGui")
+local rs = game:GetService("ReplicatedStorage")
+local vim = game:GetService("VirtualInputManager")
+
+-- Function buat place unit tomato
+local function placeTomato(cf, pos)
+    local args = {
+        "unit_tomato_plant",
+        {
+            Valid = true,
+            Rotation = 180,
+            CF = cf,
+            Position = pos
+        }
+    }
+    rs:WaitForChild("RemoteFunctions"):WaitForChild("PlaceUnit"):InvokeServer(unpack(args))
+end
+
+-- Function buat tekan key "E"
+local function pressE()
+    vim:SendKeyEvent(true, Enum.KeyCode.E, false, game)
+    task.wait(0.05)
+    vim:SendKeyEvent(false, Enum.KeyCode.E, false, game)
+end
+
+-- GUI MULAI
+if not pg:FindFirstChild("MulaiGUI") then
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "MulaiGUI"
+    screenGui.Parent = pg
+
+    local button = Instance.new("TextButton")
+    button.Size = UDim2.new(0, 120, 0, 40)
+    button.Position = UDim2.new(0.05, 0, 0.85, 0)
+    button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.Font = Enum.Font.SourceSansBold
+    button.TextSize = 20
+    button.Text = "MULAI"
+    button.Parent = screenGui
+    button.BorderSizePixel = 0
+
+    button.MouseButton1Click:Connect(function()
+        screenGui:Destroy()
+
+        -- vote difficulty easy
+        rs.RemoteFunctions.PlaceDifficultyVote:InvokeServer("dif_easy")
+
+        task.wait(5)
+        rs.RemoteFunctions.ChangeTickSpeed:InvokeServer(2)
+
+        -- place tomato awal
+        task.wait(0.2)
+        placeTomato(CFrame.new(-339.1055,61.6803,-100.4691,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-339.1055,61.6803,-100.4691))
+        task.wait(0.2)
+        placeTomato(CFrame.new(-331.3932,61.6803,-100.0715,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.3932,61.6803,-100.0715))
+        task.wait(0.2)
+        placeTomato(CFrame.new(-331.5192,61.6803,-103.1274,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.5192,61.6803,-103.1274))
+        task.wait(0.2)
+        placeTomato(CFrame.new(-338.9552,61.6803,-103.4652,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-338.9552,61.6803,-103.4652))
+
+        -- tomato ke-5 setelah 20 detik
+        task.wait(20)
+        placeTomato(CFrame.new(-339.1533,61.6803,-113.4811,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-339.1533,61.6803,-113.4811))
+
+        -- tekan E 5x
+        task.wait(0.2) pressE()
+        task.wait(5)   pressE()
+        task.wait(11)  pressE()
+        task.wait(25)  pressE()
+
+        -- tomato ke-6
+        task.wait(0.2)
+        placeTomato(CFrame.new(-332.2421,61.6803,-113.5365,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-332.2421,61.6803,-113.5365))
+        task.wait(0.2) pressE()
+        task.wait(2)   pressE()
+        task.wait(7.5) pressE()
+        task.wait(7.5) pressE()
+
+        -- tomato baru (tambahanmu)
+        task.wait(0.2)
+        placeTomato(CFrame.new(-331.9622,61.6803,-110.7127,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.9622,61.6803,-110.7127))
+    end)
+end
