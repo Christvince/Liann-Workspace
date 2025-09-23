@@ -84,7 +84,7 @@ if not pg:FindFirstChild("MulaiGUI") then
         task.wait(0.8) pressE()
         task.wait(0.8) pressE()
         task.wait(1.2) pressE()
-        task.wait(2) pressE()
-        task.wait(3) pressE()
+        task.wait(8) pressE()
+        task.wait(7) pressE()
     end)
 end
