@@ -78,13 +78,20 @@ if not pg:FindFirstChild("MulaiGUI") then
         task.wait(7.5) pressE()
         task.wait(7.5) pressE()
 
-        -- tomato baru (tambahanmu)
+        -- tomato baru (tambahan ke-7)
         task.wait(0.2)
         placeTomato(CFrame.new(-331.9622,61.6803,-110.7127,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-331.9622,61.6803,-110.7127))
         task.wait(0.8) pressE()
         task.wait(0.8) pressE()
         task.wait(1.2) pressE()
         task.wait(10) pressE()
-        task.wait(11) pressE()
+
+        -- tomato baru (tambahan ke-8, yang terakhir kamu kasih)
+        task.wait(0.2)
+        placeTomato(CFrame.new(-338.7828,61.6803,-110.5221,-1,0,-8.7e-08,0,1,0,8.7e-08,0,-1), vector.create(-338.7828,61.6803,-110.5221))
+        task.wait(10) pressE()
+        task.wait(0.2) pressE()
+        task.wait(0.2) pressE()
+        task.wait(0.2) pressE()
     end)
 end
