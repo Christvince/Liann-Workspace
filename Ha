@@ -1,0 +1,68 @@
+--// Auto Vote + Place Units + Restart (Loop Version)
+-- Made by Zipi 😎
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- Ambil semua remote sekali aja di awal biar lebih efisien
+local remotes = {
+    vote = ReplicatedStorage:WaitForChild("RemoteFunctions"):WaitForChild("PlaceDifficultyVote"),
+    place = ReplicatedStorage:WaitForChild("RemoteFunctions"):WaitForChild("PlaceUnit"),
+    restart = ReplicatedStorage:WaitForChild("RemoteFunctions"):WaitForChild("RestartGame")
+}
+
+-- Fungsi utama (1 siklus)
+local function runCycle()
+    --=== AUTO VOTE ===--
+    local voteArgs = { "dif_impossible" }
+    remotes.vote:InvokeServer(unpack(voteArgs))
+    warn("✅ Voted for impossible difficulty")
+
+    --=== DELAY 5 + 20.5 DETIK ===--
+    task.wait(5)
+    task.wait(20.5)
+
+    --=== PLACE UNIT 1: log_roller ===--
+    local logRollerArgs = {
+        "unit_log_roller",
+        {
+            Valid = true,
+            PathIndex = 1,
+            Position = Vector3.new(-335.41595458984375, 61.93030548095703, -841.3722534179688),
+            DistanceAlongPath = 236.6408450603485,
+            CF = CFrame.new(-335.41595458984375, 61.93030548095703, -841.3722534179688, -1, 0, -0, -0, 1, -0, -0, 0, -1),
+            Rotation = 180
+        }
+    }
+    remotes.place:InvokeServer(unpack(logRollerArgs))
+    warn("✅ Unit 'log_roller' placed!")
+
+    --=== DELAY 7 DETIK ===--
+    task.wait(7)
+
+    --=== PLACE UNIT 2: rafflesia ===--
+    local rafflesiaArgs = {
+        "unit_rafflesia",
+        {
+            Valid = true,
+            PathIndex = 1,
+            Position = Vector3.new(-335.38128662109375, 61.93030548095703, -686.0219116210938),
+            DistanceAlongPath = 6.46990966796875,
+            CF = CFrame.new(-335.38128662109375, 61.93030548095703, -686.0219116210938, -1, 0, -0, -0, 1, -0, -0, 0, -1),
+            Rotation = 180
+        }
+    }
+    remotes.place:InvokeServer(unpack(rafflesiaArgs))
+    warn("✅ Unit 'rafflesia' placed!")
+
+    --=== DELAY 130 DETIK ===--
+    task.wait(130)
+
+    --=== RESTART GAME ===--
+    remotes.restart:InvokeServer()
+    warn("🔁 Game restarted, starting next loop!")
+end
+
+--=== LOOP TAK TERBATAS ===--
+while true do
+    runCycle()
+end
